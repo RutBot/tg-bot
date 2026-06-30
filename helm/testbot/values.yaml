@@ -1,0 +1,16 @@
+application:
+  name: tg-bot
+  node: rut-master
+
+telegram:
+  botToken: ""
+
+replicaCount: 1
+
+database:
+  host: ""
+  port: ""
+  name: ""
+  user: ""
+  password: ""
+

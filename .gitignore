@@ -1,0 +1,29 @@
+.gradle
+build
+out
+!gradle-wrapper.jar
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!/.idea/runConfigurations
+!/.idea/codeStyles
+!/.idea/scopes
+!/.idea/vcs.xml
+!/.idea/inspectionProfiles
+!/.idea/compiler.xml
+!/.idea/modules.xml
+!/.idea/misc.xml
+!/.idea/copyright
+!/.idea/dictionaries
+!/.idea/externalDependencies.xml
+
+### Kotlin ###
+.kotlin
+.kotlin-scripts
+
+### macOS ###
+.DS_Store
