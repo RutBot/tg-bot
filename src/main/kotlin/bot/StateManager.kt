@@ -5,6 +5,8 @@ import com.github.kotlintelegrambot.entities.KeyboardReplyMarkup
 import com.github.kotlintelegrambot.entities.keyboard.KeyboardButton
 import com.github.kotlintelegrambot.entities.InlineKeyboardMarkup
 import com.github.kotlintelegrambot.entities.keyboard.InlineKeyboardButton
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -27,6 +29,19 @@ object StateRegistry {
 
     fun get(name: String?): BotState? = states[name]
 }
+
+@Serializable
+data class User(
+    val telegramId: Long,
+    val chatId: Long,
+    val name: String?,
+    val surname: String?,
+    val city: String?,
+    val isRegistered: Boolean,
+    val lastInput: String,
+    val state: String,
+    val lastMessageTime: Long? = null
+)
 
 object Users : Table() {
     val id = long("id").autoIncrement()

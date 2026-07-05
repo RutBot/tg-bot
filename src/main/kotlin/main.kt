@@ -1,7 +1,11 @@
 package com.example
 
+import bot.CacheStateMachine
+import bot.DBStateMachine
 import bot.TestBot
 import bot.features.Registration
+import com.example.plugins.Configurator
+import com.example.plugins.EnvConfigurator
 import com.example.plugins.initDb
 import com.github.kotlintelegrambot.Bot
 import org.jetbrains.exposed.sql.Database
@@ -27,7 +31,9 @@ import kotlin.compareTo
 
 
 fun Application.module() {
-    val botToken = environment.config.property("tg.token").getString()
+    val stateManager = CacheStateMachine()
+    val config = EnvConfigurator()
+    val botToken = config.telegramToken
     val testBot = TestBot(botToken)
     testBot.addFeature(Registration())
     testBot.addFeature(bot.features.MainMenu())
@@ -41,6 +47,8 @@ fun Application.module() {
     }
 
     initDb()
+    val dbStateManager = DBStateMachine()
+
     botInstance.startPolling()
 }
 
