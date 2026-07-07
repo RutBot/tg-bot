@@ -1,45 +1,26 @@
-
 plugins {
-    alias(libs.plugins.kotlin.jvm)
-    alias(ktorLibs.plugins.ktor)
+    kotlin("jvm") version "2.0.21" apply false
+    kotlin("plugin.spring") version "2.0.21" apply false
+    id("org.springframework.boot") version "3.3.5" apply false
+    id("io.spring.dependency-management") version "1.1.6" apply false
 }
 
-repositories {
-    mavenCentral()
-    maven("https://jitpack.io")
+allprojects {
+    group = "ru.kruasanich"
 
+    // Версия: gradle property `releaseVersion` → иначе `0.1.0-$BUILD_NUMBER-SNAPSHOT` → дефолт.
+    val baseVersion = "0.1.0"
+    val explicitVersion = providers.gradleProperty("releaseVersion").orNull
+    val buildNumber = providers.environmentVariable("BUILD_NUMBER").orNull
+    version = explicitVersion
+        ?: buildNumber?.let { "$baseVersion-$it-SNAPSHOT" }
+        ?: "$baseVersion-SNAPSHOT"
 }
 
-group = "com.example"
-version = "1.0.0-SNAPSHOT"
-
-application {
-    mainClass = "com.example.MainKt"
+subprojects {
+    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+        compilerOptions {
+            freeCompilerArgs.add("-Xjsr305=strict")
+        }
+    }
 }
-
-kotlin {
-    jvmToolchain(21)
-}
-dependencies {
-    implementation(ktorLibs.server.config.yaml)
-    implementation(ktorLibs.server.core)
-    implementation(ktorLibs.server.netty)
-    implementation(libs.logback.classic)
-    implementation("io.github.kotlin-telegram-bot.kotlin-telegram-bot:telegram:6.3.0")
-    implementation("io.ktor:ktor-server-content-negotiation:3.5.0")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:3.5.0")
-    implementation("org.postgresql:postgresql:42.7.7")
-    implementation("org.flywaydb:flyway-core:12.9.0")
-    implementation("org.flywaydb:flyway-database-postgresql:12.9.0")
-    implementation("org.jetbrains.exposed:exposed-core:0.59.0")
-    implementation("org.jetbrains.exposed:exposed-dao:0.59.0")
-    implementation("org.jetbrains.exposed:exposed-jdbc:0.59.0")
-    implementation("org.jetbrains.exposed:exposed-kotlin-datetime:0.59.0")
-    implementation("org.jetbrains.exposed:exposed-migration:0.59.0")
-    implementation("com.zaxxer:HikariCP:6.3.0")
-    implementation("io.insert-koin:koin-ktor:4.0.0")
-    implementation("io.insert-koin:koin-logger-slf4j:4.0.0")
-    testImplementation(kotlin("test"))
-    testImplementation(ktorLibs.server.testHost)
-}
-
