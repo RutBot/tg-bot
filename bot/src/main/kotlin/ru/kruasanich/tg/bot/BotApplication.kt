@@ -7,7 +7,7 @@ import org.springframework.boot.runApplication
  * Точка входа приложения крипто-бота.
  *
  * Всё поведение бота описано декларативно сценарием (`CryptoScenarioConfig`)
- * поверх движка `bot-engine-core`. Транспорт, состояние и запуск собирает
+ * поверх движка `core`. Транспорт, состояние и запуск собирает
  * `BotConfig` — здесь только загрузка контекста Spring.
  */
 @SpringBootApplication
