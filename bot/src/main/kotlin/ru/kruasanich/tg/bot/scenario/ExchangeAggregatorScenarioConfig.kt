@@ -9,7 +9,7 @@ import ru.kruasanich.telegram.bot.engine.core.model.Scenario
 import ru.kruasanich.telegram.bot.engine.core.model.ScreenContent
 
 /**
- * Сценарий бота-агрегатора бирж, созданный на основе описания из файла "text idea".
+ * Сценарий бота-агрегатора бирж, созданный на основе описания из файла "text idea"./
  */
 @Configuration
 @Profile("exchange-aggregator")
