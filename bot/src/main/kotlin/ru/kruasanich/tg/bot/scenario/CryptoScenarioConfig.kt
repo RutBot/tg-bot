@@ -2,6 +2,7 @@ package ru.kruasanich.tg.bot.scenario
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Profile
 import ru.kruasanich.telegram.bot.engine.core.dsl.scenario
 import ru.kruasanich.telegram.bot.engine.core.model.Button
 import ru.kruasanich.telegram.bot.engine.core.model.ButtonAction
@@ -24,6 +25,7 @@ import ru.kruasanich.telegram.bot.engine.core.session.scope
  *  4. После регистрации — главный экран с меню (крипторынок, профиль, о проекте).
  */
 @Configuration
+@Profile("crypto")
 class CryptoScenarioConfig {
 
     private companion object {

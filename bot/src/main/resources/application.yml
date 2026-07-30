@@ -1,5 +1,7 @@
 # Настройки крипто-бота.
 spring:
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:crypto}
   application:
     name: tg-bot
   main:

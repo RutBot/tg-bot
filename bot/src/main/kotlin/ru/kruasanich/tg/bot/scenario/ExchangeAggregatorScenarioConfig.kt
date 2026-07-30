@@ -2,6 +2,7 @@ package ru.kruasanich.tg.bot.scenario
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Profile
 import ru.kruasanich.telegram.bot.engine.core.dsl.scenario
 import ru.kruasanich.telegram.bot.engine.core.model.InputResult
 import ru.kruasanich.telegram.bot.engine.core.model.Scenario
@@ -11,6 +12,7 @@ import ru.kruasanich.telegram.bot.engine.core.model.ScreenContent
  * Сценарий бота-агрегатора бирж, созданный на основе описания из файла "text idea".
  */
 @Configuration
+@Profile("exchange-aggregator")
 class ExchangeAggregatorScenarioConfig {
 
     private companion object {

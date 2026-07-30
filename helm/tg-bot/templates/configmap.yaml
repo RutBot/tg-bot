@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.application.name }}
+  labels:
+    app: {{ .Values.application.name }}
+data:
+  TELEGRAM_BOT_TOKEN: {{ .Values.telegram.botToken | quote }}
+  TELEGRAM_BOT_USERNAME: {{ .Values.telegram.botUsername | quote }}
+  BOT_AUTO_REGISTER: {{ .Values.telegram.autoRegister | quote }}
+  SPRING_PROFILES_ACTIVE: {{ .Values.scenario.activeProfile | quote }}
+  DB_HOST: {{ .Values.database.host | quote }}
+  DB_PORT: {{ .Values.database.port | quote }}
+  DB_NAME: {{ .Values.database.name | quote }}
+  DB_USERNAME: {{ .Values.database.user | quote }}
+  DB_PASSWORD: {{ .Values.database.password | quote }}

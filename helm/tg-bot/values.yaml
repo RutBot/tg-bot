@@ -1,0 +1,21 @@
+application:
+  name: tg-bot
+  node: rut-master
+
+telegram:
+  botToken: ""
+  botUsername: "marktestbot"
+  autoRegister: "false"
+
+scenario:
+  activeProfile: "exchange-aggregator"
+
+replicaCount: 1
+
+database:
+  host: ""
+  port: ""
+  name: ""
+  user: ""
+  password: ""
+
