@@ -5,7 +5,7 @@ application:
 telegram:
   botToken: ""
   botUsername: "marktestbot"
-  autoRegister: "false"
+  autoRegister: "true"
 
 scenario:
   activeProfile: "exchange-aggregator"

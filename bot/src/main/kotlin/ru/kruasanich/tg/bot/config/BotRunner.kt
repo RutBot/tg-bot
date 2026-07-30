@@ -27,23 +27,12 @@ class BotRunner(
 
     private val log = LoggerFactory.getLogger(BotRunner::class.java)
     private var application: TelegramBotsLongPollingApplication? = null
-    private val keepAliveThread = Thread {
-        try {
-            Thread.currentThread().join()
-        } catch (e: InterruptedException) {
-            log.info("Keep-alive thread interrupted")
-        }
-    }.apply {
-        isDaemon = false
-        name = "bot-keep-alive"
-    }
 
     /** Подключить обработчик и (опционально) зарегистрировать потребителя. */
     override fun afterPropertiesSet() {
         consumer.processor = { update -> engine.handle(update) }
         if (properties.autoRegister && properties.token.isNotBlank()) {
             register()
-            keepAliveThread.start()
         } else {
             log.info("Bot auto-registration disabled (token blank or auto-register=false); engine wired without transport")
         }
@@ -59,6 +48,5 @@ class BotRunner(
     /** Корректно остановить long-polling при остановке контекста. */
     override fun destroy() {
         application?.close()
-        keepAliveThread.interrupt()
     }
 }
