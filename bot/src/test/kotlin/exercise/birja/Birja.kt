@@ -2,8 +2,36 @@ package exercise.birja
 
 import org.junit.jupiter.api.Test
 import java.math.BigDecimal
+import java.util.UUID
 
 
+interface StockExchange {
+    fun isOpen(): Boolean
+    fun showTickers(): List<String>
+    fun showOrders(ticker: String): List<InstrumentBit>
+    fun placeOrder(orderAmount: Int, type: OrderType, ticker: String)
+}
+
+interface StockExchangeAccount {
+    fun createAccount(fio: String, amount: BigDecimal): Account
+    fun showAccounts(): List<String>
+    fun showBalance(accountId: UUID): BigDecimal
+}
+
+data class Account(val id: UUID, val fio: String, val amount: BigDecimal)
+enum class OrderType { MARKET, LIMIT }
+data class InstrumentBit(val ticker: String, val bid: BigDecimal, val ask: BigDecimal)
+
+interface StockExchangeApi {
+    fun getStockExchange(): StockExchange
+    fun getStockExchangeAccount(): StockExchangeAccount
+}
+
+interface StockExchangeAggregator {
+    fun showTickers(): List<String>
+    fun showOrders(ticker: String): List<InstrumentBit>
+    fun placeOrder(orderAmount: Int, type: OrderType, ticker: String)
+}
 
 interface Birja {
     val userRepository: UserRepository

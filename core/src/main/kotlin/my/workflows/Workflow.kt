@@ -2,14 +2,15 @@ package my.workflows
 
 import kotlin.reflect.KType
 
+enum class ExecutionStrategy { ONCE, REPETITIVE }
+enum class WorkflowStatus { SUCCESS, FAILURE, PENDING, RUNNING }
 /**
  * WARNING: Workflow and it's actions support type checking for standard types (Int, String, List, Map, etc.)
  * but does not guarantee type validation for custom types or complex generics
  */
 @WorkflowsDsl
 class Workflow(val name: String, val executionStrategy: ExecutionStrategy = ExecutionStrategy.ONCE) {
-    enum class ExecutionStrategy { ONCE, REPETITIVE }
-    enum class WorkflowStatus { SUCCESS, FAILURE, PENDING, RUNNING }
+
 
     val actions: MutableList<Action> = mutableListOf()
     var status: WorkflowStatus = WorkflowStatus.PENDING
