@@ -4,6 +4,11 @@ application:
 
 telegram:
   botToken: ""
+  botUsername: "marktestbot"
+  autoRegister: "true"
+
+scenario:
+  activeProfile: "exchange-aggregator"
 
 replicaCount: 1
 

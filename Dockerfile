@@ -1,13 +1,11 @@
-# Stage 1: Build
-FROM gradle:8-jdk21 AS build
+# Stage 1: Build the bot module fat-jar.
+FROM gradle:8.10.2-jdk21 AS build
 WORKDIR /app
 COPY --chown=gradle:gradle . .
-RUN ./gradlew installDist --no-daemon
+RUN gradle :bot:bootJar --no-daemon
 
-# Stage 2: Run
+# Stage 2: Run.
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
-COPY --from=build /app/build/install/ktor-tgbot2 /app
-
-EXPOSE 8080
-ENTRYPOINT ["/app/bin/ktor-tgbot2"]
+COPY --from=build /app/bot/build/libs/*.jar app.jar
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]
