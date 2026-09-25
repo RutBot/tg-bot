@@ -1,17 +1,26 @@
 package exercise
 
-enum class TrubaEventType { UserRegistered, PriceIncreased, OrderFinished }
-data class TrubaEvent(val name: String, val message: String, val type: TrubaEventType)
+enum class EventType { UserRegistered, PriceIncreased, OrderFinished }
+data class GeneralEvent(val name: String, val message: String, val type: EventType)
 
 fun generateNextEvent() {
 
 }
 
 interface Truba {
-    fun receiveEvent(event: TrubaEvent)
-    fun forwardEventToSubscribers(event: TrubaEvent)
+    fun receiveEvent(event: GeneralEvent)
+    fun forwardEventToSubscribers(event: GeneralEvent)
 }
 
 interface Obvyazka {
-    fun subscribeToTruba(truba: Truba, eventType: TrubaEventType, predicate: ((TrubaEvent) -> Boolean)? = null)
+    fun subscribeToTruba(truba: Truba, eventType: EventType, predicate: ((GeneralEvent) -> Boolean)? = null)
+}
+
+
+interface PubSub {
+    fun fireEvent(event: GeneralEvent)
+    fun subscribe(eventType: EventType, predicate: ((GeneralEvent) -> Boolean)? = null, handler: (GeneralEvent) -> Unit): Subscription
+    fun onEvent(handler: (GeneralEvent) -> Unit)
+    fun subscribeOnFailedEvent(handler: (Throwable) -> Unit)
+    fun removeSubscription(subscription: Subscription)
 }
