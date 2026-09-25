@@ -10,9 +10,9 @@ name: tg-bot CI/CD
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "concept/new-one-with-dsl" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "concept/new-one-with-dsl" ]
 
 jobs:
   build:

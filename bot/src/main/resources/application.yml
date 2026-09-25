@@ -1,0 +1,15 @@
+# Настройки крипто-бота.
+spring:
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:crypto}
+  application:
+    name: tg-bot
+  main:
+    # Боту не нужен web-сервер: транспорт — Telegram long polling.
+    web-application-type: none
+
+bot:
+  engine:
+    token: ${TELEGRAM_BOT_TOKEN:}          # токен от BotFather
+    username: ${TELEGRAM_BOT_USERNAME:crypto_start_bot}
+    auto-register: ${BOT_AUTO_REGISTER:true}
